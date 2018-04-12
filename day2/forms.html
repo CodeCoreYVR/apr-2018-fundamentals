@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Forms</title>
+  </head>
+  <body>
+    <h1>Contact Us</h1>
+    <form>
+      <div>
+        <label for="user">Username</label>
+        <input id="user" type="text" placeholder="e.g. John Doe">
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password">
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email">
+      </div>
+      <div>
+        <select>
+          <option disabled>Admin</option>
+          <option>Employee</option>
+          <option hidden>Consultant</option>
+        </select>
+      </div>
+      <div>
+        <input name="skills" type="radio"><label>JavaScript</label>
+        <input name="skills" type="radio" checked><label>HTML</label>
+        <input name="skills" type="radio"><label>CSS</label>
+      </div>
+      <div>
+        <input type="submit">
+      </div>
+    </form>
+  </body>
+</html>
