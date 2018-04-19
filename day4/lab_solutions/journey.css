@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  background-image: url(http://i.imgur.com/sePmKcT.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+div {
+  font-size: 36px;
+  text-align: center;
+  color: red;
+  background-color: rgba(255, 0, 0, 0.5);
+  padding: 20px 0px;
+}
