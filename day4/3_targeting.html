@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Targeting</title>
+    <style>
+      h1 {
+        color: green;
+        font-family: sans-serif;
+      }
+      /* class, id */
+      /* id - should be unique to the page, one-off */
+      #topic2 {
+        color: red;
+      }
+      /* class - meant to reused, can occur more than once */
+      .history {
+        color: blue;
+      }
+      /* direct descendant  */
+      ul > li {
+        color: brown;
+      }
+      ol > li {
+        color: pink;
+      }
+      /* li {
+        color: brown;
+      } */
+      /* ul {
+        color: brown;
+      }
+      ul li {
+        color: brown;
+      }
+      .item {
+        color: brown;
+      }
+      .group {
+        color: brown;
+      } */
+    </style>
+  </head>
+  <body>
+    <h1>Topic #1</h1>
+    <h1 id="topic2">Topic #2</h1>
+    <h1 class="history">Topic #3</h1>
+    <h1 class="history">Topic #4</h1>
+    <h1 class="history">Topic #5</h1>
+    <p class="history">Caesar crossed the Rubicon in ???</p>
+    <input type="text" class="history">
+    <button class="history">Launch</button>
+    <!-- <a href="#topic2"></a>
+    <a href="#top"></a> -->
+
+    <!-- parent -->
+    <ul>
+      <!-- kids -->
+      <li>Mix the ingredients.</li>
+      <li>Roll the dough into small balls and place on a baking sheet.</li>
+      <li>Bake at 325&deg;F for 10 minutes.</li>
+        <ol>
+          <!-- grand kids -->
+          <li>Dip in milk</li>
+          <li>Eat yummy cookie</li>
+        </ol>
+
+    </ul>
+  </body>
+</html>

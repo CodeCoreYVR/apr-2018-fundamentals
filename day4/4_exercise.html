@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      .special {
+        color: grey;
+      }
+      /* containing, any descendant */
+      .special > p {
+        color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- how to style all <p> elements within a <div> with the class "special" -->
+    <!-- parent -->
+    <div class="special">
+      <!-- children -->
+      <p>Blackbird</p>
+      <p>It's Been a Hard Day's Night</p>
+      <p>Let It Be</p>
+      <span>
+        <!-- grand child -->
+        <p>Beatle Songs</p>
+      </span>
+    </div>
+  </body>
+</html>

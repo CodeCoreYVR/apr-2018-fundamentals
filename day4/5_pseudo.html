@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
+    <style>
+      /* make the hyperlink firebrick red, not underlined, and san-serif.  when you roll over it, i want it to turn teal and have an underline */
+      body {
+        background-color: lightblue;
+        background-image: url(https://image.freepik.com/free-photo/empty-sea-and-beach-background_1339-4262.jpg);
+      }
+      a {
+        /* 3 rods, 3 cones in our human eyes */
+        /* red, green, blue = RGB */
+        /* color: firebrick; */
+        /* 0 - 255, 2^8 */
+        /* color: rgb(133, 133, 133); */
+        /* color: rgba(133, 133, 133, 0.5); */
+        /* hexadecimal */
+        /* 0 - 255, 00 - FF */
+        /* color: #824892; */
+        /* color: #824892; */
+        text-decoration: none;
+        /* font-family: "Minecraft", "Arial", "Times New Roman", sans-serif; */
+        font-family: 'Indie Flower', cursive;
+        background-color: #FFFFFF;
+        opacity: 0.5;
+
+        /* CSS MDN */
+      }
+      /* pseudo selector */
+      a:hover {
+        /* color: teal; */
+        text-decoration: underline;
+        cursor: crosshair;
+      }
+    </style>
+
+    <link rel="stylesheet" href="5_style1.css">
+    <link rel="stylesheet" href="5_style2.css">
+  </head>
+  <body>
+    <a href="http://www.amazon.ca">Amazon</a>
+  </body>
+</html>
