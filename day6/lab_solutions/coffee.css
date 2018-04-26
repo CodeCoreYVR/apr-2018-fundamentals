@@ -1,0 +1,27 @@
+.card {
+  width: 500px;
+  height: 100%;
+  border: 2px solid #BBBBBB;
+  border-radius: 10px;
+  background-color: #EEEEEE;
+}
+
+h1 {
+  text-align: center;
+  color: orange;
+}
+
+img {
+  border-width: 1px;
+  border-color: #BBBBBB;
+  border-style: dashed none;
+  padding: 20px 0px;
+  max-width: 100%;
+}
+
+#ingredients {
+  margin: 10px;
+  padding: 10px;
+  background-color: #FEEBC9;
+  border-radius: 10px;
+}
