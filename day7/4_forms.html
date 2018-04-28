@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Forms</title>
+    <!-- 1. include jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      // event? DOMContentLoaded
+      // $(document).ready(function(){
+      //   $('h1').html('Unsecure Login');
+      // });
+
+      // 2. is the document ready
+      $(function(){
+        $('h1').html('Unsecure Login');
+        $('form').submit(function(event){
+          // alert("a form was submitted, and jquery knew about it!");
+          event.preventDefault();
+          //window.location.href = "http://www.codecore.ca";
+          console.log( $('#username').val() );
+          console.log( $('#password').val() );
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Secure Login</h1>
+    <form action="http://www.disneyland.com/">
+      <input id="username" type="text">
+      <input id="password" type="password">
+      <input type="submit">
+    </form>
+  </body>
+</html>

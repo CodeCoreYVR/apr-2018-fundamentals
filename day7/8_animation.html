@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Animation</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#rocket').css("width", 100);
+        $('#rocket').css("position", "absolute");
+        $('#rocket').css("bottom", 0);
+        $('#rocket').css("left", 300);
+        $('body').css("backgroundColor", "darkblue");
+
+        // make the ship take off?
+        setInterval(function(){
+          let currentY = parseInt( $('#rocket').css("bottom"))+1;
+          console.log(currentY);
+          $('#rocket').css("bottom", currentY);
+        }, 10);
+      });
+    </script>
+  </head>
+  <body>
+    <img id="rocket" src="rocket.png">
+  </body>
+</html>

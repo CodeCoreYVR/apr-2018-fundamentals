@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>jQuery Demo</title>
+        <!-- 1. include the library -->
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script>
+            // vanilla javascript, not using any libraries
+            // 3. wait till the page is done loading 
+            document.addEventListener("DOMContentLoaded", function(){
+                // 4. target the element and change it's text
+                document.getElementById("header").innerHTML = "JavaScript Demo";
+            });
+        </script>
+        <script>
+            // jquery syntax
+            $(function() {
+                $('#header').html('jQuery is here!');
+            });
+        </script>
+    </head>
+    <body>
+        <!-- 2. give an element an id -->
+        <h1 id="header">HTML Demo</h1>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Game</title>
+    <!-- <style>
+      #rocket {
+        width: 100px;
+        position: absolute;
+        top: 300px;
+        left: 400px;
+      }
+    </style> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      // is the document ready?
+      $(document).ready(function(){
+        $('#rocket').css('width'); // getter
+        $('#rocket').css('width', 100); // setter
+        $('#rocket').css('position', 'absolute');
+        $('#rocket').css('top', 500);
+        $('#rocket').css('left', 600);
+
+        $(document).mousemove(function(event){
+          console.log("a mouse is moving: " + event);
+          console.log("x: " + event.clientX);
+          console.log("y: " + event.clientY);
+          $('#rocket').css('top', event.clientY);
+          $('#rocket').css('left', event.clientX);
+          // console.log("a mouse is moving: " + event.x);
+        });
+      });
+      // $(function(){
+      //   $('#rocket').css('width', 100);
+      // });
+    </script>
+  </head>
+  <body>
+    <img id="rocket" src="rocket.png">
+  </body>
+</html>

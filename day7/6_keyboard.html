@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Keyboard Events</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('form').submit(function(event) {
+          event.preventDefault();
+        });
+
+        $('input').keypress(function(event) {
+          console.log(event.key);
+          $('input').val("Jacob");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form>
+      <label>Credit Card #</label>
+      <input type="input">
+      <label>PIN</label>
+      <input type="password">
+      <input type="submit" value="Pay Now">
+    </form>
+  </body>
+</html>
