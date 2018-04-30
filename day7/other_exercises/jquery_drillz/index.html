@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div>
+      <div id='change_button'>
+        <button type="button" name="button" class="btn-primary">Click Me</button>
+      </div>
+      <br/>
+      <form id="info">
+        <input id="First_Name" name="First Name" placeholder="First Name" type="text"/>
+        <input id="Last_Name" name="Last Name" placeholder="Last Name" type="text"/>
+        <input id="Email" name="Email" placeholder="Email" type="text"/>
+        <input name="commit" type="submit" value="Submit"/>
+      </form>
+      <div id='display'></div>
+      <br/>
+      <div>
+        <input id="logger" placeholder="Type something.." type="text">
+        <p id="message"></p>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        // Toggle Class
+        $("#change_button button").on("click", function() {
+          $(this).toggleClass("btn-primary btn-danger");
+        })
+
+        // Personal Info
+        $("form#info").on("submit", function(event) {
+          event.preventDefault();
+
+          const firstName = $('input#First_Name').val()
+          const lastName = $('input#Last_Name').val()
+          const email = $('input#Email').val()
+          const message = `First Name: ${firstName}, Last Name: ${lastName}, Email: ${email}`
+
+          $("#display").text(message)
+
+          $("form#info").trigger("reset")
+        })
+
+        // STRETCH: Key Logger
+        $("input#logger").keyup(function() {
+          let textInput = $(this).val();
+
+          $("#message").text(textInput)
+        });
+      });
+    </script>
+  </body>
+</html>
