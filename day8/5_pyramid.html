@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Flexbox Pyramid</title>
+    <style>
+      .red { background-color: red }
+      .orange { background-color: orange }
+      .yellow { background-color: yellow }
+      .green { background-color: green }
+
+      .row {
+        display: flex;
+        justify-content: center;
+      }
+      .row:nth-child(1) .item {
+        background-color: blue !important;
+      }
+      .row:nth-child(2) .item {
+        background-color: purple !important;
+      }
+      .item {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="red item"></div>
+    </div>
+    <div class="row">
+      <div class="orange item"></div>
+      <div class="orange item"></div>
+    </div>
+    <div class="row">
+      <div class="yellow item"></div>
+      <div class="yellow item"></div>
+      <div class="yellow item"></div>
+    </div>
+    <div class="row">
+      <div class="green item"></div>
+      <div class="green item"></div>
+      <div class="green item"></div>
+      <div class="green item"></div>
+    </div>
+  </body>
+</html>

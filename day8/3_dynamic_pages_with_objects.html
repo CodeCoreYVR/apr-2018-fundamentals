@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Amazon</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      $(document).ready(function() {
+        // let products = [product1, product2, product3];
+        const product = {
+          name: "shoes",
+          price: 300.00,
+          img: "runners.jpg",
+          desc: "These are really expensive shoes!"
+        };
+
+        $('.container .name').html(product.name);
+        $('.container .price').html(product.price);
+        // $('.container img').src(product.img);
+        $('.container img').attr('src', product.img);
+        $('.container div').eq(3).html(product.desc);
+      });
+    </script>
+    <style>
+      .container {
+        width: 250px;
+        height: 250px;
+        border: thin grey solid;
+        border-radius: 4px;
+        padding: 10px;
+        display: inline-block;
+        margin: 10px;
+        /* display: flex; */
+      }
+      img {
+        width: 100%;
+      }
+      .name {
+        float: left;
+        /* align-self: flex-start; */
+      }
+      .price {
+        float: right;
+        /* align-self: flex-end; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="name"></div>
+      <div class="price"></div>
+      <div><img src=""></div>
+      <div></div>
+    </div>
+    <!-- <div class="container">
+      <div class="name">Shoes</div>
+      <div class="price">$300.00</div>
+      <div><img src="runners.jpg"></div>
+      <div>These are really expensive shoes!</div>
+    </div>
+    <div class="container">
+      <div class="name">Shoes</div>
+      <div class="price">$300.00</div>
+      <div><img src="runners.jpg"></div>
+      <div>These are really expensive shoes!</div>
+    </div>
+    <div class="container">
+      <div class="name">Shoes</div>
+      <div class="price">$300.00</div>
+      <div><img src="runners.jpg"></div>
+      <div>These are really expensive shoes!</div>
+    </div>
+    <div class="container">
+      <div class="name">Shoes</div>
+      <div class="price">$300.00</div>
+      <div><img src="runners.jpg"></div>
+      <div>These are really expensive shoes!</div>
+    </div>
+    <div class="container">
+      <div class="name">Shoes</div>
+      <div class="price">$300.00</div>
+      <div><img src="runners.jpg"></div>
+      <div>These are really expensive shoes!</div>
+    </div>
+    <div class="container">
+      <div class="name">Shoes</div>
+      <div class="price">$300.00</div>
+      <div><img src="runners.jpg"></div>
+      <div>These are really expensive shoes!</div>
+    </div> -->
+  </body>
+</html>

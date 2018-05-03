@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dynamic Pages</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      $(document).ready(function() {
+        let staples = ["milk", "eggs", "cereal", "bread", "oranges", "apple"];
+
+        for (let item of staples) {
+          $('ol').prepend(`<li>${item}</li>`);
+        }
+
+        $('#item-text').focus();
+
+        $('#grocery-form').submit(function(event) {
+          event.preventDefault();
+          let item = $('#item-text').val(); // getter / setter
+          $('ol').prepend(`<li>${item}</li>`);
+          // prepend(); // top
+          // append(); // bottom
+          $('#item-text').val("").focus(); // getter / setter
+        });
+
+        // $('li').on('click', function(){});
+        $('li').click(function() {
+          // console.log("a li was clicked!");
+          //$(this).remove();
+          // .hide();
+          $(this).slideUp(1000, function() {
+            $(this).remove();
+            // shoppingList.contains();
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Grocery List</h1>
+
+    <form id="grocery-form">
+      <label>Grocery Item:</label>
+      <input id="item-text" type="text" placeholder="e.g. milk">
+      <input type="submit">
+    </form>
+
+    <ol>
+    </ol>
+
+  </body>
+</html>
