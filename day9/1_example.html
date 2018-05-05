@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Local Storage Example</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      $(document).ready(function(){
+        // the page first loads
+        // ??
+        $('#username').val(localStorage.username); // setter
+
+        $('form').submit(function(){
+          localStorage.username = $('#username').val(); // getter
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form>
+      <input id="username" type="text">
+      <input type="password">
+      <input type="submit">
+    </form>
+  </body>
+</html>

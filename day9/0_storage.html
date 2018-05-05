@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Local Storage</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      // let;
+      // setInterval();
+      // localStorage.username = "Orsolya";
+      // localStorage.password = "summer";
+      $(document).ready(function() {
+        // set the input fields color according to the value in local storage
+        $('#color').val( localStorage.color );
+        $('body').css('background-color', localStorage.color);
+
+        // $('form').on('submit', function(){});
+        $('form').submit(function(event){
+          event.preventDefault();
+          localStorage.color = $('#color').val();
+          $('body').css('background-color', localStorage.color);
+        });
+        
+        $(document).mouseenter(function(event) {
+          console.log("hello :" + event);
+          localStorage.color = $('#color').val();
+          $('body').css('background-color', localStorage.color);
+        })
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Settings</h1>
+    <form>
+      <input id="color" type="color">
+      <input type="submit">
+    </form>
+  </body>
+</html>

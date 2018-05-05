@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Chat Example</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script>
+      $(document).ready(function(){
+        // What we did in firebase is called: CREATE
+
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyAdioeNGzx2qzSg455HKbk_QR_tGCGw0AA",
+          authDomain: "codecore-56b0a.firebaseapp.com",
+          databaseURL: "https://codecore-56b0a.firebaseio.com",
+          projectId: "codecore-56b0a",
+          storageBucket: "codecore-56b0a.appspot.com",
+          messagingSenderId: "346837372646"
+        };
+        firebase.initializeApp(config);
+
+        // this allows us to have a reference specifically to the messages table
+        const messagesRef = firebase.database().ref('/messages');
+        // const usersRef = firebase.database().ref('/users');
+
+        $('#timeStamp').val(Date());
+
+        // READ, CRUD - Create, Read, Update, Delete
+        messagesRef.on('child_added', function(event) {
+          console.log("we have successfully connected to the messages table!");
+          console.log(event);
+          const messageId = event.key;
+          console.log("event.key: " + event.key);
+          const messageObj = event.val();
+          console.log("event.val(): " + event.val());
+          console.log(messageObj);
+
+          // decorator pattern
+          let decorator = `
+            <div class="message" id="${messageId}">
+              <span><strong>${messageObj.name}</strong>: ${messageObj.body}</span>
+              <div>${messageObj.timeStamp}</div>
+              <button>Delete</button>
+              <hr>
+            </div>
+          `;
+
+          $('#messages').prepend(`<div>${decorator}</div>`);
+
+          $('button').click(function() {
+            // fade out then delete?
+            console.log("button clicked");
+            $(this).parent().fadeOut().remove();
+            let msgId = $(this).parent().attr('id');
+            console.log(msgId);
+            firebase.database().ref(`/messages/${msgId}`).remove();
+          });
+
+          // $('#name').html(`<strong>${messageObj.name}</strong>:`);
+          // $('#body').html(messageObj.body);
+        });
+
+        // messagesRef.on('child_removed', function(data) {});
+        // messagesRef.on('child_changed', function(data) {});
+
+        // $(document).on('click', function(){});
+        $('form').submit(function(event){
+          event.preventDefault();
+          // JSON
+          messagesRef.push({name: $('#name').val(), body: $('#body').val(), timeStamp: Date()});
+          $('#body').val("").focus();
+          $('#timeStamp').val(Date());
+        });
+      });
+    </script>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      input {
+        border: none;
+        border-bottom: thin dotted black;
+        margin: 10px;
+      }
+      /* input[type=submit] {} */
+      #submit {
+        background-color: #4285F4;
+        color: white;
+        padding: 5px;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- UI -->
+    <h1>Fundamentals April Chat Room</h1>
+    <form>
+      <div>
+        <label>Name: </label>
+        <input id="name" type="text">
+      </div>
+      <div>
+        <label>Message: </label>
+        <textarea id="body"></textarea>
+      </div>
+      <div>
+        <label>TimeStamp: </label>
+        <input id="timeStamp" type="text" value="">
+      </div>
+      <div>
+        <input id="submit" type="submit">
+      </div>
+    </form>
+
+    <h2>Messages</h2>
+    <div id="messages">
+    </div>
+  </body>
+</html>
+
+
+<!-- {
+  projectId: "codecore-560a",
+  messages: {
+    1: {
+      name: "Jacob",
+      body: "Hello!"
+    }
+  }
+} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  -->
