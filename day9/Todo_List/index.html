@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <title>Todo List</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+
+    <script>
+      // Initialize Firebase
+      // Add you config info here...
+      var config = {
+
+      };
+      firebase.initializeApp(config);
+
+      const todoList = firebase.database().ref('todos')
+
+      todoList.on('child_added', function(data) {
+        const id = data.key
+        const task = data.val()
+
+        console.log(id, task)
+
+        if (task.completed) {
+          $('#complete-tasks').prepend(`
+            <div class='card' id='todo-${id}'>
+              <div class='card-body'>
+                ${task.task}
+                <a href="#" class="float-right btn btn-info" data-id='${id}'>Delete</a>
+                <a href="#" class="float-right btn btn-danger toggle-complete" data-id='${id}' data-task='${task.task}' data-completed='${task.completed}'>
+                  Mark NOT Complete
+                </a>
+              </div>
+            </div>
+          `)
+        } else {
+          $('#incomplete-tasks').prepend(`
+            <div class='card' id='todo-${id}'>
+              <div class='card-body'>
+                ${task.task}
+                <a href="#" class="float-right btn btn-info" data-id='${id}'>Delete</a>
+                <a href="#" class="float-right btn btn-success toggle-complete" data-id='${id}' data-task='${task.task}' data-completed='${task.completed}'>
+                  Mark Complete
+                </a>
+              </div>
+            </div>
+          `)
+        }
+
+        $(".btn.btn-info").click(function(event) {
+          event.preventDefault();
+          const id = $(this).data('id')
+
+          todoList.child(id).remove();
+
+          // this is the equivalent of the below line
+          // firebase.database().ref(`todos/${id}`).remove()
+        });
+      })
+
+      todoList.on('child_removed', function(data) {
+        const id = data.key;
+        $(`#todo-${id}`).fadeOut();
+      })
+
+      $(document).ready(function() {
+        $('form#task-form').submit(function(event) {
+          event.preventDefault()
+
+          const task = $('#body').val()
+
+          todoList.push({ task: task, completed: false })
+
+          $('#body').val('')
+        })
+
+        $('#tasks').on('click', '.toggle-complete', function() {
+          const id = $(this).data('id')
+          const task = $(this).data('task')
+          const completed = $(this).data('completed')
+
+          // Hiding the task
+          $(`#todo-${id}`).fadeOut()
+
+          // Delete the task
+          firebase.database().ref(`todos/${id}`).remove()
+
+          // recreate the task
+          todoList.push({ task: task, completed: !completed })
+        })
+      })
+    </script>
+
+  </head>
+  <body>
+    <div class="container">
+      <h1>Firebase Todo</h1>
+
+      <form id="task-form">
+        <div class="form-group">
+          <label for="name">Task</label>
+          <input type="text" id="body" class="form-control">
+        </div>
+        <input type="submit" value="Send Message" class="btn btn-primary">
+      </form>
+
+      <hr>
+
+      <div id="tasks">
+        <h2>Pending Tasks</h2>
+        <div id="incomplete-tasks">
+          <!-- We will be listing all of our messages in here -->
+        </div>
+
+        <h2>Complete Tasks</h2>
+        <div id="complete-tasks">
+          <!-- We will be listing all of our messages in here -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
