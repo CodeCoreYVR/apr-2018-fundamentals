@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Chat App</title>
+    <!-- 1. load in jquery -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+      // 2. make sure it's ready
+      $(document).ready(function() {
+        // gift from google
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyD1CyuEWvForXRIECHM7PNImkt2ZHiqxZA",
+          authDomain: "day10-6ed49.firebaseapp.com",
+          databaseURL: "https://day10-6ed49.firebaseio.com",
+          projectId: "day10-6ed49",
+          storageBucket: "",
+          messagingSenderId: "519761853313"
+        };
+
+        firebase.initializeApp(config);
+        const messagesRef = firebase.database().ref('/messages');
+
+        // child_added, when we first connect to the database,
+        // it returns all the data in the table
+        // $('form').submit();
+        // $('form').on('submit', function(){});
+        // $('button').click();
+        // $('button').on('click', function(){})
+        messagesRef.on('child_added', function(event){
+          // on connecting with our table, what data is currently inside?
+          console.log(event.key);
+          console.log(event.val());
+          let name = event.val().name;
+          let message = event.val().body;
+
+          let decorator = `
+            <div id="${ event.key }">
+              <strong>${ name }</strong>: ${ message }<br>
+              <span style="font-size: 5px;">${ Date() }</span>
+              <button>Archive</button>
+              <hr>a
+            </div>
+          `;
+
+          $('#messages').prepend( decorator );
+          $('button').click(function() {
+            console.log("a delete button was clicked!");
+            // how do we know which button was clicked,
+            // we use the keyword this!
+            $(this).parent().fadeOut(1000, function() {
+              //$(this).remove();
+              $('#archived-messages').prepend( $(this) );
+              $(this).fadeIn();
+            });
+          });
+        });
+
+        // when add to the database, it returns the new record
+        // that was added
+
+        $('#name').focus();
+        // $('input[type=text]').focus();
+
+        // $('form')
+        $('#chat-form').submit(function(event){
+          event.preventDefault();
+          // let name = $('#name').val();
+          // let message = $('#message').val();
+
+          messagesRef.push({
+            name: $('#name').val(),
+            body: $('#message').val()
+          });
+          // let decorator = `
+          //   <div id="">
+          //     <strong>${ name }</strong>: ${ message }<br>
+          //     <span style="font-size: 5px;">${ Date() }</span>
+          //     <button>Archive</button>
+          //     <hr>
+          //   </div>
+          // `;
+          //
+          // $('#messages').prepend( decorator );
+
+          // clear the message box and give it focus
+          $('#message').val("").focus();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Friendly Chat App</h1>
+    <form id="chat-form">
+      <div>
+        <label for="name">Name:</label>
+        <input id="name" type="text">
+      </div>
+      <div>
+        <label for="message">Message:</label>
+        <textarea id="message"></textarea>
+      </div>
+      <div>
+        <input type="submit">
+      </div>
+    </form>
+    <h2>Messages</h2>
+    <div id="messages"></div>
+
+    <h2>Archived Messages</h2>
+    <div id="archived-messages"></div>
+  </body>
+</html>
