@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Awesome Messages</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyD1CyuEWvForXRIECHM7PNImkt2ZHiqxZA",
+        authDomain: "day10-6ed49.firebaseapp.com",
+        databaseURL: "https://day10-6ed49.firebaseio.com",
+        projectId: "day10-6ed49",
+        storageBucket: "",
+        messagingSenderId: "519761853313"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(config);
+
+      // this will create a references to `messages` in our firebase database
+      // which means it will have to do with all the messages so events will be
+      // triggered when something changes to `messages` such as adding a message
+      // removing a message or updating a message
+      const messagesRef = firebase.database().ref('messages');
+
+      messagesRef.on('child_added', function(data) {
+        // The data from Firebase will have a key which is the id. It also has
+        // a value but we have to extract it using Firebase's .val() function
+        // NOTE: the val function you see directly below... " data.val(); "
+        //       is from Firebase! it is different from the jQuery one.
+        const id = data.key;
+        const messageContent = data.val();
+
+        // Insert the message as an HTML snippet into div with id `messages`
+        // The message data is inserted into the HTML using `${}`
+        // We prepend because we want to see the newest ones first.
+        // We added id="message-${id}" because we want to be able to target the
+        // entire div and remove it from the page when we click `Delete`
+        $('#messages').prepend(`
+          <div class="card mb-2" id="message-${id}">
+            <div class="card-body d-flex justify-content-between">
+              <div>
+                <strong>${messageContent.name} says:</strong>
+                <br/>
+                ${messageContent.body}
+              </div>
+              <div>
+                <a href="javascript:void(0)" class="btn btn-danger float-right" data-id="${id}">Delete</a>
+              </div>
+            </div>
+          </div>
+        `);
+
+        // Here we are attaching a click event handler to each message
+        // We have to do it here inside the 'child_add' when the message is
+        // inserted to the webpage, otherwise it will not work because the
+        // code only runs once.
+        $(`[data-id=${id}]`).click(function(event) {
+          event.preventDefault();
+
+          // Here we select the message on firebase using the id and delete it
+          // using the Firebase's remove function
+          firebase.database().ref(`messages/${id}`).remove();
+        });
+      });
+
+      // When a message is deleted from Firebase, this code is executed.
+      // We just use it to fadeOut the message after it is deleted from Firebase
+      messagesRef.on('child_removed', function(data) {
+        const id = data.key;
+        $(`#message-${id}`).fadeOut();
+      });
+
+      $(document).ready(function() {
+        $('#message-form').submit(function(event){
+          event.preventDefault();
+
+          // Get the text inputs from the form and save to variables
+          const name = $('#name').val()
+          const body = $('#body').val()
+
+          // Create a message on Firebase. We use Firebase's push function to
+          // send our data to the database
+          messagesRef.push({
+            name: name,
+            body: body
+          });
+
+          // Clear the form inputs
+          $('#name').val('');
+          $('#body').val('');
+          $('#name').focus();
+        });
+      })
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Awesome Messages</h1>
+
+      <form id="message-form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id='name' class='form-control'>
+        </div>
+        <div class="form-group">
+          <label for="body">Message</label>
+          <textarea id="body" class="form-control"></textarea>
+        </div>
+        <input type="submit" class="btn btn-primary">
+      </form>
+
+      <hr>
+
+      <div id="messages">
+        <!-- All messages will show up in here -->
+      </div>
+    </div>
+  </body>
+</html>
